@@ -1,0 +1,56 @@
+.main_menu  {
+  margin-top: 150px;
+}
+
+.main_menu ul {
+  list-style: none;
+}
+
+.main_menu ul li a {
+  font-size: 25px;
+  color: #000000;
+  padding: 5px;
+}
+
+.main_menu ul li a:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+#video_preview video {
+  margin-top: 20%;
+  width: 100%;
+}
+
+#capture-thumbnails {
+  list-style: none;
+  display: inline;
+}
+
+#capture-thumbnails li {
+  display: inline;
+}
+
+#capture-thumbnails li img {
+  width: 70px;
+}
+
+#plate_list {
+  margin-top: 3%;
+}
+
+#plate_list table thead th {
+  text-align: center;
+}
+
+#plate_list table tbody tr td {
+  text-align: center;
+}
+
+.pin_low {
+  background-color: #ff0000; color: #ff0000; padding: 2px;
+}
+
+.pin_high {
+  background-color: #00ff00; color: #00ff00; padding: 2px;
+}

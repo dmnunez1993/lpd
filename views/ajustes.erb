@@ -1,0 +1,18 @@
+    <div class="row">
+      <div class="large-6 columns">
+        <img src="/images/logo.png" style="margin-top: 50px;" />
+      </div>
+      <div class="large-6 columns main_menu">
+        <h3>Ajustes</h3>
+        <form method="post">
+          <fieldset>
+            <p>Confidencia <input name="confidence_value" type="text" style="width: 20%;" value="<%= @current_config['confidence'] %>" /></p>
+            <p>turnMotorOff <input name="turnMotorOff_value" type="text" style="width: 20%;" value="<%= @current_config['turnMotorOff'] %>" /></p>
+            <p>turnMotorTwoOn <input name="turnMotorTwoOn_value" type="text" style="width: 20%;" value="<%= @current_config['turnMotorTwoOn'] %>" /></p>
+            <p>turnMotorTwoOff <input name="turnMotorTwoOff_value" type="text" style="width: 20%;" value="<%= @current_config['turnMotorTwoOff'] %>" /></p>
+            <p><input type="submit" value="Guardar" /></p>
+            
+          </fieldset>
+        </form>
+      </div>
+    </div>

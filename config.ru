@@ -1,0 +1,2 @@
+require './chapatronics'
+run ChapatronicsApp

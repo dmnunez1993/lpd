@@ -1,0 +1,115 @@
+
+    <div class="row">
+      <div class="large-6 columns" id="video_preview">
+        <video></video><br />
+        <a class="button" id="captureBtn" href="#">Realizar detección</a>
+        <p class="pin_label">Sensor: <span id="sensor_status" class="pin_low">_</span></p>
+        <!--<p class="pin_label">Motor: <span id="motor_status" class="pin_high">_</span></p>-->
+        <ul id="capture-thumbnails"></ul>
+      </div>
+      <div class="large-6 columns main_menu">
+        <p class="status">Listo.</p>
+        <ul id="detection_details">
+          <li><b>Plate #</b> <span id="plate_number"> </span></li>
+          <li><b>Name</b> <span id="name"> </span></li>
+          <li><b>Label</b> <span id="label"> </span></li>
+          <li><b>Confidence</b> <span id="confidence"> </span></li>
+        </ul>
+      </div>
+    </div>
+
+  <script>
+    $(document).ready( function() {
+
+      window.onProcess = false;
+
+      function onCaptureError() {
+        alert('Error de captura!');
+      };
+
+      navigator.webkitGetUserMedia({audio: false, video: true}, function(stream) {
+        document.querySelector('video').src = window.webkitURL.createObjectURL(stream);
+      }, onCaptureError);
+
+      document.querySelector('video').play();
+
+      $('#captureBtn').on( 'click', function(e) {
+        if ( $('video').attr('src') == null ) {
+          return false;
+        };
+
+        window.onProcess = true;
+
+        $('#captureBtn').attr('disabled', 'true');
+        $('.status').text('Procesando...');
+
+        video = $('video').get(0);
+        scale = 0.25;
+
+        var canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth * scale;
+        canvas.height = video.videoHeight * scale;
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height );
+
+        $.ajax( { type: 'post',
+                  url: '/deteccion',
+                  data: { 'image_data': canvas.toDataURL() },
+                  success: function(raw_response) {
+                    $('.status').text('Detección finalizada');
+                    console.log( 'El servidor recibio la imagen.' );
+                    //response = jQuery.parseJSON(raw_response );
+                    //$('#capture-thumbnails').append( '<li><img src="/' + response.image_path + '" /></li>' );
+                    response = jQuery.parseJSON( raw_response );
+                    console.log( response );
+                    $('#plate_number').text( response.plate_number );
+                    $('#name').text( response.name );
+                    $('#label').text( response.label );
+                    $('#confidence').text( response.confidence );
+
+                    if( response.confidence < <%= @config['confidence'] %> ) {
+                      $.ajax( { type: 'get', url: '/turn_motor_on' });
+                      function turnMotorOff() {
+                        $.ajax( { type: 'get', url: '/turn_motor_off' });
+                      };
+                      function turnMotorTwoOn() {
+                        $.ajax( { type: 'get', url: '/turn_motor_two_on' });
+                      };
+                      function turnMotorTwoOff() {
+                        $.ajax( { type: 'get', url: '/turn_motor_two_off' });
+                        window.onProcess= false;
+                      };
+                      window.setTimeout(turnMotorOff, <%= @config['turnMotorOff'] %> );
+                      window.setTimeout(turnMotorTwoOn, <%= @config['turnMotorTwoOn'] %> );
+                      window.setTimeout(turnMotorTwoOff, <%= @config['turnMotorTwoOff'] %> );
+                      //window.setTimeout(turnMotorTwoOn, 5000 );
+                      //window.setTimeout(turnMotorTwoOff, 10000 );
+                    } else {
+                      $.ajax( { type: 'get', url: '/turn_motor_off' });
+                      window.onProcess = false;
+                    };
+                    $('#captureBtn').removeAttr('disabled');
+                  }});
+        e.preventDefault();
+      });
+
+      function checkSensor() {
+        if( window.onProcess ) {
+          console.log('onProcess = true');
+        } else {
+          console.log('onProcess= false');
+          $.ajax( { type: 'get',
+                    url: '/sensor_info',
+                    success: function(raw_response) {
+                      response = jQuery.parseJSON( raw_response )
+                      if( response['sensor'] == true ) {
+                        $('#sensor_status').attr('class', 'pin_high' );
+                        $('#captureBtn').trigger('click');
+                      } else {
+                        $('#sensor_status').attr('class', 'pin_low' );
+                      }}
+                  });
+        };
+      };
+      window.setInterval( checkSensor, 2000 );
+    });
+  </script>

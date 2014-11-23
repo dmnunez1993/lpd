@@ -1,0 +1,74 @@
+
+    <div class="row">
+      <div class="large-6 columns" id="video_preview">
+        <video></video><br />
+        <a class="button" id="captureBtn" href="#">Capturar</a>
+        <ul id="capture-thumbnails"></ul>
+      </div>
+      <div class="large-6 columns main_menu">
+        <form method="post">
+          <fieldset>
+            <legend>Ingrese los datos</legend>
+            <label>Nombre
+              <input id="txtNombre" type="text" name="nombre" placeholder="Ingresar Nombre" /></label>
+            <label for="numero_chapa">Nro. de Chapa
+              <input id="txtNumeroChapa" type="text" name="numero_chapa" placeholder="XXXXXX" /></label>
+            </label>
+           <a id="submitBtn" href="#" class="button">Listo &raquo;</a>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+  <script>
+    $(document).ready( function() {
+
+      function onCaptureError() {
+        alert('Error de captura!');
+      };
+
+      navigator.webkitGetUserMedia({audio: false, video: true}, function(stream) {
+        document.querySelector('video').src = window.webkitURL.createObjectURL(stream);
+      }, onCaptureError);
+
+      document.querySelector('video').play();
+
+      $('#submitBtn').hide();
+
+      $('#submitBtn').on('click', function(e) {
+        location.href = '/lista';
+      });
+
+      $('#captureBtn').on( 'click', function(e) {
+
+        if( $('#capture-thumbnails li').size() < 2 ) {
+          $('#txtNombre').attr('disabled', 'true' );
+          $('#txtNumeroChapa').attr('disabled', 'true' );
+        } else {
+          $('#submitBtn').show();
+        };
+
+        console.log('Capturando imagen y enviandola al servidor para el modelo.');
+        video = $('video').get(0);
+        scale = 0.25;
+        var canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth * scale;
+        canvas.height = video.videoHeight * scale;
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height );
+        //var img = document.createElement('img');
+        //img.src = canvas.toDataURL();
+        $.ajax( { type: 'post',
+                  url: '/entrenar',
+                  data: { 'image_data': canvas.toDataURL(),
+                          'name': $('#txtNombre').val(),
+                          'plate_number': $('#txtNumeroChapa').val() },
+                  success: function(raw_response) {
+                    console.log( 'El servidor recibio la imagen.' );
+                    response = jQuery.parseJSON(raw_response );
+                    $('#capture-thumbnails').append( '<li><img src="/' + response.image_path + '" /></li>' );
+                  }});
+        e.preventDefault();
+      });
+
+    });
+  </script>

@@ -1,0 +1,32 @@
+
+    <div class="row">
+      <div class="large-10 columns" id="plate_list">
+        <table>
+          <thead>
+            <tr>
+              <th width="90">Chapa</th>
+              <th width="200">Nombre</th>
+              <th width="250">Imagenes</th>
+              <th width="250">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @plate_groups.each do |group, elements| %>
+              <tr>
+                <td><%= group[0] %></td><td><%= group[1] %></td>
+                <td>
+                <% elements.each do |e| %>
+                  <b><%= e.id %></b>, <%= e.image_path %><br /> 
+                <% end %>
+                </td>
+                <td><a href="/lista/<%= group[0] %>/eliminar">Eliminar</a></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <script>
+    $(document).ready( function() {
+    });
+  </script>
