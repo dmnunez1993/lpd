@@ -78,14 +78,15 @@ class Image
       if v == first_item
         id = k.split('.')[1]
         return Image.find_by_id(id)
-      end  
+      end
     end
-    
+
   end
 end
 
 def get_sensor_status()
-  value =`gpio read 2`.strip().to_i
+  #value =`gpio read 2`.strip().to_i
+  value = 1
   if value == 0
     #turn_motor_off()
     return false
@@ -117,15 +118,15 @@ class ChapatronicsApp < Sinatra::Base
   end
 
   get '/ajustes' do
-    @current_config = YAML.load_file('/home/pi/chapatronics/config.yml')
+    @current_config = YAML.load_file('./config.yml')
     erb :ajustes
   end
 
   post '/ajustes' do
     @new_config = { 'confidence' => params[:confidence_value], 'turnMotorOff' => params[:turnMotorOff_value],
                     'turnMotorTwoOn' => params[:turnMotorTwoOn_value], 'turnMotorTwoOff' => params[:turnMotorTwoOff_value] }
-    
-    open( '/home/pi/chapatronics/config.yml', 'w') do |f|
+
+    open( './config.yml', 'w') do |f|
       f.print(@new_config.to_yaml)
     end
     redirect '/ajustes'
@@ -180,7 +181,7 @@ class ChapatronicsApp < Sinatra::Base
   end
 
   get '/seguimiento' do
-    @config = YAML.load_file('/home/pi/chapatronics/config.yml')
+    @config = YAML.load_file('./config.yml')
     erb :seguimiento
   end
 
