@@ -97,18 +97,18 @@ def get_sensor_status()
 end
 
 def turn_motor_on()
-  `gpio write 0 1`
+  `echo 1 > /sys/class/gpio/gpio4/value`
 end
 def turn_motor_off()
-  `gpio write 0 0`
+  `echo 0 > /sys/class/gpio/gpio4/value`
 end
 
 def turn_motor_two_on()
-  `gpio write 4 1`
+  `echo 1 > /sys/class/gpio/gpio3/value`
 end
 
 def turn_motor_two_off()
-  `gpio write 4 0`
+  `echo 1 > /sys/class/gpio/gpio3/value`
 end
 
 class ChapatronicsApp < Sinatra::Base
