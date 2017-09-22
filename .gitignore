@@ -2,3 +2,4 @@ model/*.png
 model/model
 .DS_Store
 backend/detection
+certs/
