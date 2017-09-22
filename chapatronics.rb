@@ -85,8 +85,8 @@ class Image
 end
 
 def get_sensor_status()
-  #value =`gpio read 2`.strip().to_i
-  value = 1
+  value =`gpio read 2`.strip().to_i
+
   if value == 0
     #turn_motor_off()
     return false
