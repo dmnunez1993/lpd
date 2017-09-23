@@ -85,14 +85,14 @@ class Image
 end
 
 def get_sensor_status()
-  value =`gpio read 2`.strip().to_i
+  value =`cat /sys/class/gpio/gpio21/value`.strip().to_i
 
   if value == 0
     #turn_motor_off()
-    return false
+    return true
   else
     #turn_motor_on()
-    return true
+    return false
   end
 end
 
@@ -108,7 +108,7 @@ def turn_motor_two_on()
 end
 
 def turn_motor_two_off()
-  `echo 1 > /sys/class/gpio/gpio3/value`
+  `echo 0 > /sys/class/gpio/gpio3/value`
 end
 
 class ChapatronicsApp < Sinatra::Base

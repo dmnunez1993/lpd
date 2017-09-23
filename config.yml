@@ -1,5 +1,5 @@
 ---
-confidence: '80'
-turnMotorOff: '3000'
+confidence: '2000'
+turnMotorOff: '300'
 turnMotorTwoOn: '5000'
-turnMotorTwoOff: '8000'
+turnMotorTwoOff: '5300'

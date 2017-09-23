@@ -1,0 +1,32 @@
+[ N 2017-09-22 18:33:17.9214 6211/T1 age/Wat/WatchdogMain.cpp:1283 ]: Starting Passenger watchdog...
+[ N 2017-09-22 18:33:17.9598 6214/T1 age/Cor/CoreMain.cpp:1083 ]: Starting Passenger core...
+[ N 2017-09-22 18:33:17.9605 6214/T1 age/Cor/CoreMain.cpp:248 ]: Passenger core running in multi-application mode.
+[ N 2017-09-22 18:33:18.0168 6214/T1 age/Cor/CoreMain.cpp:830 ]: Passenger core online, PID 6214
+[ N 2017-09-22 18:33:18.0706 6220/T1 age/Ust/UstRouterMain.cpp:537 ]: Starting Passenger UstRouter...
+[ N 2017-09-22 18:33:18.0754 6220/T1 age/Ust/UstRouterMain.cpp:350 ]: Passenger UstRouter online, PID 6220
+App 6263 stdout: 
+[ N 2017-09-22 18:33:21.8316 6214/T5 age/Cor/SecurityUpdateChecker.h:374 ]: Security update check: no update found (next check in 24 hours)
+App 6284 stdout: 
+
+[ N 2017-09-22 18:35:08.0250 6214/T6 age/Cor/CoreMain.cpp:588 ]: Signal received. Gracefully shutting down... (send signal 2 more time(s) to force shutdown)
+[ N 2017-09-22 18:35:08.0252 6214/T1 age/Cor/CoreMain.cpp:1002 ]: Received command to shutdown gracefully. Waiting until all clients have disconnected...
+
+[ N 2017-09-22 18:35:08.0253 6214/T1 age/Cor/CoreMain.cpp:917 ]: Checking whether to disconnect long-running connections for process 6284, application /var/www/chapatronics/public (development)
+[ N 2017-09-22 18:35:08.0254 6220/T4 age/Ust/UstRouterMain.cpp:430 ]: Signal received. Gracefully shutting down... (send signal 2 more time(s) to force shutdown)
+[ N 2017-09-22 18:35:08.0256 6220/T1 age/Ust/UstRouterMain.cpp:500 ]: Received command to shutdown gracefully. Waiting until all clients have disconnected...
+[ N 2017-09-22 18:35:08.0259 6220/T6 Ser/Server.h:886 ]: [UstRouterApiServer] Freed 0 spare client objects
+[ N 2017-09-22 18:35:08.0260 6220/T6 Ser/Server.h:531 ]: [UstRouterApiServer] Shutdown finished
+[ N 2017-09-22 18:35:08.0269 6214/Tb Ser/Server.h:886 ]: [ServerThr.3] Freed 128 spare client objects
+[ N 2017-09-22 18:35:08.0271 6214/Tb Ser/Server.h:531 ]: [ServerThr.3] Shutdown finished
+[ N 2017-09-22 18:35:08.0273 6214/T9 Ser/Server.h:886 ]: [ServerThr.2] Freed 128 spare client objects
+[ N 2017-09-22 18:35:08.0274 6214/T9 Ser/Server.h:531 ]: [ServerThr.2] Shutdown finished
+[ N 2017-09-22 18:35:08.0276 6214/Tf Ser/Server.h:886 ]: [ApiServer] Freed 0 spare client objects
+[ N 2017-09-22 18:35:08.0276 6214/Tf Ser/Server.h:531 ]: [ApiServer] Shutdown finished
+[ N 2017-09-22 18:35:08.0285 6214/Td Ser/Server.h:886 ]: [ServerThr.4] Freed 128 spare client objects
+[ N 2017-09-22 18:35:08.0287 6214/Td Ser/Server.h:531 ]: [ServerThr.4] Shutdown finished
+[ N 2017-09-22 18:35:08.0291 6220/T4 Ser/Server.h:531 ]: [UstRouter] Shutdown finished
+[ N 2017-09-22 18:35:08.0301 6214/T6 Ser/Server.h:886 ]: [ServerThr.1] Freed 128 spare client objects
+[ N 2017-09-22 18:35:08.0302 6214/T6 Ser/Server.h:531 ]: [ServerThr.1] Shutdown finished
+[ N 2017-09-22 18:35:08.0315 6220/T1 age/Ust/UstRouterMain.cpp:531 ]: Passenger UstRouter shutdown finished
+[ N 2017-09-22 18:35:08.0327 6214/T1 age/Cor/CoreMain.cpp:917 ]: Checking whether to disconnect long-running connections for process 6284, application /var/www/chapatronics/public (development)
+[ N 2017-09-22 18:35:08.2884 6214/T1 age/Cor/CoreMain.cpp:1068 ]: Passenger core shutdown finished
