@@ -86,7 +86,7 @@
                             turnMotorTwoOn();
                             window.setTimeout(turnMotorTwoOff, <%= @config['turnMotorTwoOff'] %> );
                         } else {
-                            window.setTimeout(this, <%= @config['turnMotorTwoOn'] %> );
+                            window.setTimeout(close, <%= @config['turnMotorTwoOn'] %> );
                         }
                       }
                       window.setTimeout(turnMotorOff, <%= @config['turnMotorOff'] %> );
