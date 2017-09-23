@@ -84,6 +84,8 @@
                         if (window.sensor)  {
                             turnMotorTwoOn();
                             window.setTimeout(turnMotorTwoOff, <%= @config['turnMotorTwoOff'] %> );
+                        } else {
+                            window.setTimeout(this, <%= @config['turnMotorTwoOn'] %> );
                         }
                       }
                       window.setTimeout(turnMotorOff, <%= @config['turnMotorOff'] %> );
