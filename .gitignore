@@ -3,3 +3,4 @@ model/model
 .DS_Store
 backend/detection
 certs/
+logs/
