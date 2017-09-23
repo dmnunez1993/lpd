@@ -81,8 +81,8 @@
                         window.onProcess= false;
                       };
                       function close()  {
-                        console.log(window.sensor);
-                        if (window.sensor)  {
+
+                        if (!window.sensor)  {
                             turnMotorTwoOn();
                             window.setTimeout(turnMotorTwoOff, <%= @config['turnMotorTwoOff'] %> );
                         } else {
