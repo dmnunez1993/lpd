@@ -105,6 +105,18 @@
       function checkSensor() {
         if( window.onProcess ) {
           console.log('onProcess = true');
+          $.ajax( { type: 'get',
+                    url: '/sensor_info',
+                    success: function(raw_response) {
+                      response = jQuery.parseJSON( raw_response )
+                      if( response['sensor'] == true ) {
+                        $('#sensor_status').attr('class', 'pin_high' );
+                        window.sensor = true;
+                      } else {
+                        $('#sensor_status').attr('class', 'pin_low' );
+                        window.sensor = false;
+                      }}
+                  });
         } else {
           console.log('onProcess= false');
           $.ajax( { type: 'get',
