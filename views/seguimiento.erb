@@ -38,6 +38,8 @@
           return false;
         };
 
+        window.sensor = false;
+
         window.onProcess = true;
 
         $('#captureBtn').attr('disabled', 'true');
@@ -78,9 +80,14 @@
                         $.ajax( { type: 'get', url: '/turn_motor_two_off' });
                         window.onProcess= false;
                       };
+                      function close()  {
+                        if (window.sensor)  {
+                            turnMotorTwoOn();
+                            window.setTimeout(turnMotorTwoOff, <%= @config['turnMotorTwoOff'] %> );
+                        }
+                      }
                       window.setTimeout(turnMotorOff, <%= @config['turnMotorOff'] %> );
-                      window.setTimeout(turnMotorTwoOn, <%= @config['turnMotorTwoOn'] %> );
-                      window.setTimeout(turnMotorTwoOff, <%= @config['turnMotorTwoOff'] %> );
+                      window.setTimeout(close, <%= @config['turnMotorTwoOn'] %> );
                       //window.setTimeout(turnMotorTwoOn, 5000 );
                       //window.setTimeout(turnMotorTwoOff, 10000 );
                     } else {
@@ -104,8 +111,10 @@
                       if( response['sensor'] == true ) {
                         $('#sensor_status').attr('class', 'pin_high' );
                         $('#captureBtn').trigger('click');
+                        window.sensor = true;
                       } else {
                         $('#sensor_status').attr('class', 'pin_low' );
+                        window.sensor = false;
                       }}
                   });
         };
